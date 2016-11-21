@@ -1,5 +1,5 @@
 {
-  "name":"codepress/code-database",
+  "name":"codepress/code-category",
   "require":{
     "php": ">=5.5.9",
    "illuminate/contracts": "~5.2.0",
@@ -16,7 +16,8 @@
   },
   "autoload": {
     "psr-4": {
-      "CodePress\\CodeDatabase\\": "src/CodeDatabase/"
+      "CodePress\\CodeCategory\\": "src/CodeCategory/",
+      "CodePress\\CodeDatabase\\": "../codedatabase/src/CodeDatabase/"
     }
   }
 }
