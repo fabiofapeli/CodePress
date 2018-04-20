@@ -33,9 +33,20 @@ class Category extends Model implements SluggableInterface
     public function children(){
         return $this->hasMany(Category::class, 'parent_id');
     }
-
+/*
+retirar
     public function categorizable(){ //O método categorizable será útil para permitir categorizar todos outros tipos de model. Ex: páginas, produtos e etc
         return $this->morphTo();
+    }
+
+*/
+
+    public function posts(){
+      return $this->morphedByMany('CodePress\CodePosts\Models\Post',
+       //categorizable escopo para os campos de polimorfismo da tabela codepress_categorizables
+       'categorizable', 
+      //Como o nome da tabela não é categorizables (convenção laravel) devemos especificar o nome
+      'codepress_categorizables'); 
     }
 
    public function setValidator(Validator $validator){

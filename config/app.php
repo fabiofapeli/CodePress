@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         \CodePress\CodeCategory\Providers\CodeCategoryServiceProvider::class,
+        \CodePress\CodeTag\Providers\CodeTagServiceProvider::class,
         \Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         /*
          * Application Service Providers...

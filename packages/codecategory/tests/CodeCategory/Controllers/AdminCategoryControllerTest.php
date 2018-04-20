@@ -20,21 +20,24 @@ class AdminCategoryControllerTest extends AbstractTestCase
         $this->assertInstanceOf(Controller::class, $controller); 
         
     }
-    
     /*
     public function test_controller_should_run_index_method_and_return_correct_argument(){
-        $repository = m::mock(CategoryRepository::class);
+         
         $responseFactory = m::mock(ResponseFactory::class);
-        $controller = new AdminCategoryController($responseFactory, $repository);
+        $category = m::mock(Category::class);
+        $controller = new AdminCategoryController($responseFactory, $category);
         $html = m::mock();
         
         $categoriesResult = ['cat1', 'cat2'];
-        $repository->shouldReceive('view')
-                ->with('codecategory::index', ['categories' => $categoriesResult])
-                ->andReturn($html);
+        $category->shouldReceive('all')->andReturn($categoriesResult);
+        $responseFactory->shouldReceive('view')
+                ->with('codecategory::index', ['categories' => $categoriesResult]) //parâmetros obrigatórios
+                ->andReturn($html); // objeto qualquer
         
         $this->assertEquals($controller->index(), $html);
     }
-    */
+     */
+    
+    
 }
 

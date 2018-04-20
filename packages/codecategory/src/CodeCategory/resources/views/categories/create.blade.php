@@ -7,13 +7,14 @@
 
       {!! Form::open(['method'=>'post', 'route' => 'admin.categories.store']) !!}
 
-<?php
-$selected = 0;
-?>
-
        <div class="form-group">
         {!! Form::label('Parent', 'Parent:') !!}
-        {!! Form::select('parent_id', $categories, $selected, ['class' => 'form-control']) !!}
+        <select name="parent_id" id="parent_id" class="form-control" required="required">
+                <option value="0"></option>
+                @foreach($categories as $c)
+                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                @endforeach
+        </select>
        </div>
 
 

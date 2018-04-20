@@ -1,7 +1,6 @@
 <?php
 namespace CodePress\CodeDatabase\Tests;
 
-use CodePress\CodeDatabase\Models\Category;
 use Orchestra\Testbench\TestCase;
 
 abstract class AbstractTestCase extends TestCase

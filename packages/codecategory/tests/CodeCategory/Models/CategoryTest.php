@@ -1,6 +1,7 @@
 <?php
 namespace CodePress\CodeCategory\Tests\Models;
 use CodePress\CodeCategory\Models\Category;
+use CodePress\CodePosts\Models\Post;
 use CodePress\CodeCategory\Tests\AbstractTestCase;
 use Illuminate\Validation\Validator;
 use Mockery as m;
@@ -12,7 +13,27 @@ class CategoryTest extends AbstractTestCase
         parent::setUp();
         $this->migrate();
     }
+ /*
+    public function teste_oneToMany(){ // Na verdade um para um
 
+       $category = Category::create(['name' => 'Category Test', 'active' => true]);
+
+       $post = Post::create(['title' => 'meu post']);
+       $post2 = Post::create(['title' => 'meu post 2']);
+
+      $post->categories()->save($category);
+      $this->assertEquals($post->id, Category::find(1)->categorizable_id);
+      $this->assertEquals('CodePress\CodeCategory\Models\Post',Category::find(1)->categorizable_type);
+
+        // Substitui relacionamento para post2
+      $post2->categories()->save($category);
+      $this->assertEquals($post2->id, Category::find(1)->categorizable_id);
+       
+
+    }
+
+ */
+   
     public function test_check_if_a_category_can_be_persisted(){
 
         $category = Category::create(['name' => 'Category Test', 'slug' => 'category-test', 'active' => true]);
@@ -80,5 +101,25 @@ class CategoryTest extends AbstractTestCase
        
    }
 
+    public function test_can_add_posts_to_categories(){
+      $category = Category::create(['name' => 'Category Test', 'active' => true]);
+
+      $post1 = Post::create(['title' => 'meu post 1', 'content' => 'Conteúdo 1']);
+      $post2 = Post::create(['title' => 'meu post 2', 'content' => 'Conteúdo 1']);
+
+      $post1->categories()->save($category);
+      $category->posts()->save($post2);
+
+      $this->assertCount(1, Category::all());
+      $this->assertEquals('Category Test', $post1->categories->first()->name);
+      $this->assertEquals('Category Test', $post2->categories->first()->name);
+
+      $posts = Category::find(1)->posts;
+      $this->assertCount(2, $posts);
+      $this->assertEquals('meu post 1', $posts[0]->title);
+      $this->assertEquals('meu post 2', $posts[1]->title);
+
+    }
 
 }
+?>

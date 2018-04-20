@@ -97,23 +97,6 @@ class CategoryRepositoryCriteriaTest extends AbstractTestCase
         $this->assertEquals('Category Dois', $result[1]->name);
     } 
     
-    /**
-     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
-     */
-    public function test_can_find_category_with_criteria_and_exception(){
-        $this->createCategoryDescription();
-        
-        $criteria1 = new FindByDescription('Description');
-        $criteria2 = new FindByName('Category Dois');
-        
-        $this->repository
-                ->addCriteria($criteria1)
-                ->addCriteria($criteria2); 
-        
-        $this->repository->find(5);
-        
-    }
-    
     public function test_can_find_category_with_criteria(){
         $this->createCategoryDescription();
         
@@ -130,6 +113,23 @@ class CategoryRepositoryCriteriaTest extends AbstractTestCase
         
     }
     
+    
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function test_can_find_category_with_criteria_and_exception(){
+        $this->createCategoryDescription();
+        
+        $criteria1 = new FindByDescription('Description');
+        $criteria2 = new FindByName('Category Dois');
+        
+        $this->repository
+                ->addCriteria($criteria1)
+                ->addCriteria($criteria2); 
+        
+        $this->repository->find(5);
+        
+    }
     
     public function test_can_findby_categories_with_criteria(){
         $this->createCategoryDescription();
