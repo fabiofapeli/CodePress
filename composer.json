@@ -25,6 +25,7 @@
             "App\\": "app/",
             "CodePress\\CodeCategory\\" : "packages/codecategory/src/CodeCategory/",
             "CodePress\\CodeTag\\": "packages/codetag/src/CodeTag/",
+            "CodePress\\CodePosts\\": "packages/codeposts/src/CodePosts/",
             "CodePress\\CodeDatabase\\": "packages/codedatabase/src/CodeDatabase/"
         }
     },

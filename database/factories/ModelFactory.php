@@ -12,6 +12,8 @@
 */
 
 use CodePress\CodeCategory\Models\Category;
+use CodePress\CodePosts\Models\Comment;
+use CodePress\CodePosts\Models\Post;
 use CodePress\CodeTag\Models\Tag;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
@@ -35,4 +37,18 @@ $factory->define(Tag::class, function (Faker\Generator $faker) {
         'name' => $faker->name
     ];
 });
+
+$factory->define(Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->title,
+        'content' => $faker->paragraph
+    ];
+});
+
+$factory->define(Comment::class, function (Faker\Generator $faker) {
+    return [
+        'content' => $faker->paragraph
+    ];
+});
+
 

@@ -8,7 +8,8 @@
    "illuminate/database": "~5.2.0",
    "illuminate/validation": "~5.2.0",
     "cviebrock/eloquent-sluggable": "^3.0",
-    "fabiofapeli/code-database": "0.0.1"
+    "fabiofapeli/code-database": "0.0.1",
+    "ktquez/laravel-tinymce": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~5.0",

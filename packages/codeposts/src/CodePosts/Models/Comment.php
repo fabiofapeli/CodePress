@@ -1,33 +1,25 @@
 <?php
 namespace CodePress\CodePosts\Models;
 
-use CodePress\CodeCategory\Models\Category;
-use CodePress\CodePosts\Models\Comment;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use CodePress\CodePosts\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Validator;
 
-class Post extends Model implements SluggableInterface
+class Comment extends Model
 
 {
 
-    use SluggableTrait, SoftDeletes;
-
     private $validator;
 
-    protected $table = "codepress_posts" ;
+    use SoftDeletes;
+
+    protected $table = "codepress_comments" ;
+
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-    'title','content','slug'
-    ];
-
-    protected $sluggable = [
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'unique'     => true
+    'content','post_id'
     ];
 
    public function setValidator(Validator $validator){
@@ -41,7 +33,6 @@ class Post extends Model implements SluggableInterface
    public function isValid(){
        $validator = $this->validator;
        $validator->setRules([
-        'title' => 'required|max:255',
         'content' => 'required'
         ]);
        $validator->setData(
@@ -56,14 +47,9 @@ class Post extends Model implements SluggableInterface
        return true;
    }
 
-   public function categories(){
-    return $this->morphToMany(Category::class, 'categorizable', 'codepress_categorizables');
+   public function post(){
+    return $this->belongsTo(Post::class); 
+    //return $this->belongsTo(Post::class)->withTrashed(); //pode ser usado também para hasMany
    }
-
-
-   public function comments(){
-    return $this->hasMany(Comment::class);
-   }
-
 
 }

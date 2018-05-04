@@ -9,7 +9,7 @@ class AdminTagsTest extends \TestCase
     
  use DatabaseTransactions;	
  
-   public function test_can_visit_admin_categories_page()
+   public function test_can_visit_admin_tags_page()
    {
        $this->visit('admin/tags')// Acessa página
        ->see('Tags'); // Verifica se teste passa

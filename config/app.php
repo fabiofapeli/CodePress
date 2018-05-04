@@ -150,6 +150,7 @@ return [
 
         \CodePress\CodeCategory\Providers\CodeCategoryServiceProvider::class,
         \CodePress\CodeTag\Providers\CodeTagServiceProvider::class,
+        \CodePress\CodePosts\Providers\CodePostServiceProvider::class,
         \Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         /*
          * Application Service Providers...

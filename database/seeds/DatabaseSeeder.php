@@ -1,5 +1,7 @@
 <?php
 use CodePress\CodeCategory\Models\Category;
+use CodePress\CodePosts\Models\Comment;
+use CodePress\CodePosts\Models\Post;
 use CodePress\CodeTag\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -15,5 +17,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         factory(Category::class, 5)->create();
         factory(Tag::class, 5)->create();
+        factory(Post::class, 10)->create()->each(
+          function ($post){
+            foreach(range(1,10) as $value){
+              $post->comment()->save(factory(Comment::class)->make());
+            }
+          }
+        );
+        $this->command->info('Finished Seeders'); //exibe informação no terminal
+
     }
 }

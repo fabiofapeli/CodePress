@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ebda2204d545a78441643f246c51688",
+    "content-hash": "1bcba257994c0b2a0bca611adafae9bb",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -464,6 +464,49 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
+        },
+        {
+            "name": "ktquez/laravel-tinymce",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ktquez/laravel-tinymce.git",
+                "reference": "dbe1d70d3e4d6f22f02b84436ef51f8bdc9d7092"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ktquez/laravel-tinymce/zipball/dbe1d70d3e4d6f22f02b84436ef51f8bdc9d7092",
+                "reference": "dbe1d70d3e4d6f22f02b84436ef51f8bdc9d7092",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ktquez\\Tinymce\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alan Albuquerque: ktquez",
+                    "email": "ktquez@gmail.com"
+                }
+            ],
+            "description": "TinyMCE editor for Laravel and Lumen Framework",
+            "homepage": "https://github.com/ktquez/laravel-tinymce",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "laravel",
+                "lumen",
+                "textarea",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2016-06-11T22:51:19+00:00"
         },
         {
             "name": "laravel/framework",

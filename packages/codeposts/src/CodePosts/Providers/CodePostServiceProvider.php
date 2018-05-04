@@ -1,6 +1,8 @@
 <?php
 namespace CodePress\CodePosts\Providers;
 
+use CodePress\CodePosts\Repository\PostRepositoryEloquent;
+use CodePress\CodePosts\Repository\PostRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class CodePostServiceProvider extends ServiceProvider
@@ -14,7 +16,11 @@ class CodePostServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        /**
+         * Com o método bind podemos registrar um serviço que poderá ser usado
+         * em qualquer lugar da nossa aplicação através de um método injection
+         */
+        $this->app->bind(PostRepositoryInterface::class, PostRepositoryEloquent::class);
     }
 
 }
