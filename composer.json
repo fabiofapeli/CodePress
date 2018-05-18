@@ -26,6 +26,7 @@
             "CodePress\\CodeCategory\\" : "packages/codecategory/src/CodeCategory/",
             "CodePress\\CodeTag\\": "packages/codetag/src/CodeTag/",
             "CodePress\\CodePosts\\": "packages/codeposts/src/CodePosts/",
+            "CodePress\\CodeUser\\": "packages/codeuser/src/CodeUser/",
             "CodePress\\CodeDatabase\\": "packages/codedatabase/src/CodeDatabase/"
         }
     },

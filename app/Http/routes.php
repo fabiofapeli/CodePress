@@ -1,5 +1,7 @@
 <?php
 
+use CodePress\CodeUser\Facade\Route as CodePressRoute; // Diferenciar o Route do Laravel do nosso
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,8 +15,9 @@
 
 
 
-
-
-Route::auth();
+CodePressRoute::auth();
 
 Route::get('/home', 'HomeController@index');
+
+
+
