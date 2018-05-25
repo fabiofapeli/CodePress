@@ -3,16 +3,26 @@ namespace CodePress\CodeCategory\Testing;
 
 use CodePress\CodeCategory\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use CodePress\CodeUser\Models\User;
 
 class AdminCategoriesTest extends \TestCase
 {
 	
 	use DatabaseTransactions;
+
+    protected function getUser(){
+      return factory(User::class) ->create();     
+    }
 	
     public function test_sample(){
-        $this->visit('admin/categories')// Acessa página
-        ->see('Categories'); // Verifica se teste passa
-        //->see('Categoriesss'); //Verifica se teste não passa
+        $this->actingAs($this->getUser()) // método irá autenticar o usuário
+              ->visit('admin/categories')// Acessa página
+              ->see('Categories'); // Verifica se teste passa
+    }
+
+    public function test_cannot_access_categories(){
+        $this->visit('admin/categories')
+              ->see('password'); 
     }
 
     public function test_categories_listing()
@@ -22,7 +32,8 @@ class AdminCategoriesTest extends \TestCase
         Category::create(['name'=>'Category 3','active'=>'true']);
         Category::create(['name'=>'Category 4','active'=>'true']);
 
-        $this->visit('admin/categories')
+        $this->actingAs($this->getUser())
+             ->visit('admin/categories')
             ->see('Category 1')
             ->see('Category 2')
             ->see('Category 3')
@@ -30,7 +41,8 @@ class AdminCategoriesTest extends \TestCase
     }
     
     public function test_create_new_category(){
-       $this->visit('admin/categories/create')  
+       $this->actingAs($this->getUser())
+            ->visit('admin/categories/create')  
            ->type('Category Test','name')          
            ->check('active')
            ->press('Create Category')

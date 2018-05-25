@@ -14,6 +14,6 @@ class CreateCodeCategorizablesTable{
 	}
 
 	public function down(){
-		Screma::drop('codepress_categorizables');
+		Schema::drop('codepress_categorizables');
 	}
 }

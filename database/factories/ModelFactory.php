@@ -15,13 +15,14 @@ use CodePress\CodeCategory\Models\Category;
 use CodePress\CodePosts\Models\Comment;
 use CodePress\CodePosts\Models\Post;
 use CodePress\CodeTag\Models\Tag;
+use CodePress\CodeUser\Models\User;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'name' => 'user',
+        'email' => 'user@email',
+        'password' => bcrypt(123456),
+        'remember_token' => str_random(10)
     ];
 });
 

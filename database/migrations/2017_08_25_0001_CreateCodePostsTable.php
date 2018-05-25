@@ -15,6 +15,6 @@ class CreateCodePostsTable{
 	}
 
 	public function down(){
-		Screma::drop('codepress_posts');
+		Schema::drop('codepress_posts');
 	}
 }

@@ -15,6 +15,6 @@ class CreateCodeCommentsTable{
 	}
 
 	public function down(){
-		Screma::drop('codepress_comments');
+		Schema::drop('codepress_comments');
 	}
 }

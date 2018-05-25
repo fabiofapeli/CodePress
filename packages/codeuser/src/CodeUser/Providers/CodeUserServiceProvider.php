@@ -29,7 +29,8 @@ class CodeUserServiceProvider extends ServiceProvider
         //método singleton cria uma única instância do serviço mesmo que chamado diversas vezes
         $this->app->singleton('codepress_user_route', function(){
             return new Router();
-        }); 
+        });
+        $this->app->register(EventServiceProvider::class);
     }
 
 }

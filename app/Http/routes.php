@@ -18,6 +18,7 @@ use CodePress\CodeUser\Facade\Route as CodePressRoute; // Diferenciar o Route do
 CodePressRoute::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 
 
