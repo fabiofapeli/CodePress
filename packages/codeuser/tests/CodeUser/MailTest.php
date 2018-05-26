@@ -1,14 +1,13 @@
 <?php
-namespace CodePress\CodeUser\Tests\UserRepositoryTest;
+namespace CodePress\CodeUser\Tests\MailTest;
 
-use CodePress\CodeUser\Event\UserCreatedEvent;
 use CodePress\CodeUser\Repository\UserRepositoryEloquent;
 use CodePress\CodeUser\Repository\UserRepositoryInterface;
-use CodePress\CodeUser\Tests\AbstractTestCase;
+use CodePress\CodeUser\Tests\AbstractMailTestCase;
 use Illuminate\Support\Facades\Hash;
 use Mockery as m;
 
-class UserRepositoryTest extends AbstractTestCase
+class MailTest extends AbstractMailTestCase
 {
     /**
      * @var UserRepositoryInterface
@@ -23,8 +22,6 @@ class UserRepositoryTest extends AbstractTestCase
     }
 
  	public function test_can_create_user(){
-        //certifica que o evento é chamado, porém não o executa
-        $this->expectsEvents(UserCreatedEvent::class); 
  		$user = $this->repository->create([
             'name' => 'Teste',
             'email' => 'teste@teste.com',

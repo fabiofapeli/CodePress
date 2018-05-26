@@ -1,11 +1,11 @@
 <?php
-namespace CodePress\CodeUser\Tests\EmailCreatedAccountListenerTest;
+namespace CodePress\CodeUser\Tests;
 
 use CodePress\CodeUser\Event\UserCreatedEvent;
+use CodePress\CodeUser\Listener\EmailCreatedAccountListener;
 use CodePress\CodeUser\Models\User;
-use CodePress\CodeUser\Tests\AbstractTestCase;
-use Iluminate\Mail\Mailer;
-use Iluminate\Mail\Message;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
 use Mockery as m;
 
 class EmailCreatedAccountListenerTest extends AbstractTestCase
@@ -28,22 +28,21 @@ class EmailCreatedAccountListenerTest extends AbstractTestCase
 
         //Mock da classe de email
         $mockMailer = m::mock(Mailer::class);
+         $mockMailer = m::mock(Mailer::class);
         $mockMailer->shouldReceive('send')
             ->with('email.registration', [
                 'username' => $mockUser->email,
-                'password' => $mockUser->password,
-            ],
-                //passando como parâmetro uma função
-                m::on(function (\Closure $closure) use ($mockUser) {
-                    $mockMessage = m::mock(Message::class);
-                    $mockMessage->shouldReceive('to')
-                        ->with($mockUser->email, $mockUser->password)
-                        ->andReturn($mockMessage);
-                    $mockMessage->shouldReceive('subject')
-                        ->with("{$mockUser->name}, sua conta foi criada!");
-                    $closure($mockMessage);
-                }
-                )
+                'password' => $mockUser->password //plainPassword
+            ], m::on(function (\Closure $closure) use ($mockUser) {
+                $mockMessage = m::mock(Message::class);
+                $mockMessage->shouldReceive('to')
+                    ->with($mockUser->email, $mockUser->name)
+                    ->andReturn($mockMessage);
+                $mockMessage->shouldReceive('subject')
+                    ->with("{$mockUser->name}, sua conta foi criada!");
+                $closure($mockMessage);
+                return true;
+            })
             //retorno é a quantidade de emails enviados
             )->andReturn(1);
 
@@ -51,5 +50,6 @@ class EmailCreatedAccountListenerTest extends AbstractTestCase
         $result = $listener->handle($event);
         $this->assertEquals(1, $result);
     }
+
 
 }

@@ -1,9 +1,10 @@
 <?php
 namespace CodePress\CodeUser\Tests\UserCreatedEventTest;
 
+use CodePress\CodeUser\Event\UserCreatedEvent;
 use CodePress\CodeUser\Models\User;
 use CodePress\CodeUser\Tests\AbstractTestCase;
-use CodePress\CodeUser\Event\UserCreatedEvent;
+use Illuminate\Support\Facades\Event;
 use Mockery as m;
 
 class UserCreatedEventTest extends AbstractTestCase
@@ -41,6 +42,11 @@ class UserCreatedEventTest extends AbstractTestCase
     public function test_constuctor(){
         $this->assertInstanceOf(User::class, $this->event->getUser());
         $this->assertEquals(123456, $this->event->getPlainPassword());
+    }
+
+    public function test_check_listener_registred_event(){
+        $array = Event::getListeners(UserCreatedEvent::class);
+        $this->assertCount(1, $array);
     }
 
 }

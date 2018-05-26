@@ -2,10 +2,12 @@
 
 namespace CodePress\CodeUser\Providers;
 
+use CodePress\CodeUser\Event\UserCreatedEvent;
+use CodePress\CodeUser\Listener\EmailCreatedAccountListener;
+use CodePress\CodeUser\Listener\TestEventListener;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use CodePress\CodeUser\Listener\TestEventListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,13 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [];
+    protected $listen = [
+         //nesse modelo não tem como atribuir prioridade de execução para os listener
+        UserCreatedEvent::class => [
+            EmailCreatedAccountListener::class
+        ]
+    ];
+
     protected $subscribe = [
         TestEventListener::class
     ];
