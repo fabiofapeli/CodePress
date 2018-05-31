@@ -101,6 +101,7 @@ class CategoryTest extends AbstractTestCase
        
    }
 
+/*
     public function test_can_add_posts_to_categories(){
       $category = Category::create(['name' => 'Category Test', 'active' => true]);
 
@@ -120,6 +121,47 @@ class CategoryTest extends AbstractTestCase
       $this->assertEquals('meu post 2', $posts[1]->title);
 
     }
+*/
+    public function test_can_soft_delete(){
+      $category = Category::create(['name' => 'Category Test', 'active' => true]);
+      $category->delete(); //fará apenas a exclusão lógica, ou seja, deleted_at = NOW()
+      $this->assertEquals(true, $category->trashed());
+      $this->assertCount(0, Category::all());
+     }
+
+     public function test_can_get_rows_deleted(){
+      $category = Category::create(['name' => 'Category Test', 'active' => true]);
+      $category->delete(); 
+      $categories = Category::onlyTrashed()->get(); // somente na lixeira
+      $this->assertEquals(1, $categories[0]->id);
+      $this->assertEquals('Category Test', $categories[0]->name);
+     }
+
+      public function test_can_get_rows_deleted_and_activated(){
+        $category = Category::create(['name' => 'Category Test', 'active' => true]);
+        Category::create(['name' => 'Category Test 2', 'content' => 'Conteudo do post 2']);
+        $category->delete(); 
+        $categories = Category::withTrashed()->get(); //todos registros
+        $this->assertCount(2, $categories);
+        $this->assertEquals(1, $categories[0]->id);
+        $this->assertEquals('Category Test', $categories[0]->name);
+       }
+
+      public function test_can_force_delete(){
+          $category = Category::create(['name' => 'Category Test', 'active' => true]);
+          $category->forceDelete(); //exclui definitivamente
+          $this->assertCount(0, Category::all());
+      }
+
+      public function test_can_restore_rows_from_delete(){
+        $category = Category::create(['name' => 'Category Test', 'active' => true]);
+        $category->delete(); 
+        $category->restore(); // restaura registro
+        $category = Category::find(1);
+        $this->assertEquals(1, $category->id);
+        $this->assertEquals('Category Test', $category->name);
+       }
+
 
 }
 ?>

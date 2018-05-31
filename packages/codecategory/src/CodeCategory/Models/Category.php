@@ -5,16 +5,19 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Validation\Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements SluggableInterface
 
 {
 
-    use SluggableTrait;
-    
+    use SluggableTrait, SoftDeletes;
+
     private $validator;
 
     protected $table = "codepress_categories" ;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
     'name','slug','active','parent_id' // categoria poderá ter outra categoria como pai

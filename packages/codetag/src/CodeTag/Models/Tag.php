@@ -5,11 +5,14 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Validator; 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Tag extends Model implements SluggableInterface
 {
-    use SluggableTrait;
+    use SluggableTrait, SoftDeletes;
     private $validator;
     protected $table = "codepress_tags";
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'name'
