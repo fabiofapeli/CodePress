@@ -14,7 +14,11 @@
                <tr>
                    <td>{{$c->id}}</td>
                    <td>{{$c->title}}</td>
-                   <td>[Edit]</td>
+                   <td>
+                            <a href="{{route('admin.posts.edit', ['id'=>$c->id])}}">
+                                Edit
+                            </a>
+                        </td>
                </tr>
            @endforeach
        </table>

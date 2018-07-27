@@ -4,6 +4,8 @@ Route::group(['prefix'=>'admin/categories','as'=>'admin.categories.','namespace'
 	'middleware'=>['web', 'auth']],
 function (){
    Route::get('',['uses'=>'AdminCategoryController@index','as'=>'index']);
-   Route::get('/create',['uses'=>'AdminCategoryController@create','as'=>'create']);
-   Route::post('/store',['uses'=>'AdminCategoryController@store','as'=>'store']);
+   Route::get('create',['uses'=>'AdminCategoryController@create','as'=>'create']);
+   Route::get('edit/{id}',['uses'=>'AdminCategoryController@edit','as'=>'edit']);
+   Route::post('store',['uses'=>'AdminCategoryController@store','as'=>'store']);
+   Route::put('update',['uses'=>'AdminCategoryController@update','as'=>'update']);
 });

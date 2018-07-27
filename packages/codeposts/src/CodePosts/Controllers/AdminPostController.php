@@ -12,6 +12,7 @@ class AdminPostController extends Controller
 
    public function __construct(ResponseFactory $response,PostRepositoryInterface $repository)
    {   
+       $this->authorize('access_posts');
        $this->response = $response;
        $this->repository = $repository;
    }
@@ -22,8 +23,12 @@ class AdminPostController extends Controller
     }
     
     public function create(){
-        $posts=$this->repository->all();
-        return view('codepost::create',compact('posts'));
+        return view('codepost::create');
+   }
+   
+    public function edit($id){
+        $post=$this->repository->find($id);
+        return view('codepost::edit',compact('post'));
    }
    
    public function store(Request $request){
@@ -31,5 +36,16 @@ class AdminPostController extends Controller
        return redirect()->route('admin.posts.index');
    }
 
-    
+    public function update(Request $request, $id){
+      $data = $request->all();
+
+      $category = $this->repository->update($data, $id);
+      return redirect()->route('admin.posts.index');
+    }
+
+    public function updateState(Request $request, $id){
+      $this->authorize('publish_post');
+      $this->repository->updateState($id, $request->get('state'));
+       return redirect()->route('admin.posts.edit', ['id' => $id]);
+    }
 }

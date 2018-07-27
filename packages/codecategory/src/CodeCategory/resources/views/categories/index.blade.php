@@ -13,6 +13,7 @@
            @foreach($categories as $c)
                <tr>
                    <td>{{$c->name}}</td>
+                   <td><a href="{{route('admin.categories.edit', $c->id)}}">Edit</a></td>
                </tr>
            @endforeach
        </table>

@@ -12,6 +12,8 @@ use Illuminate\Validation\Validator;
 class Post extends Model implements SluggableInterface
 
 {
+    const STATE_PUBLISHED = 1;
+    const STATE_DRAFT = 2;
 
     use SluggableTrait, SoftDeletes;
 

@@ -12,6 +12,7 @@ class AdminTagController extends Controller {
     private $repository;
 
     public function __construct(ResponseFactory $response, TagRepository $repository) {
+        $this->authorize('access_tags');
         $this->repository = $repository;
         $this->response = $response;
     }
