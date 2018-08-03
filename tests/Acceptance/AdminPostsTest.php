@@ -3,14 +3,33 @@ namespace CodePress\CodePost\Testing;
 
 use CodePress\CodePosts\Models\Post;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use CodePress\CodeUser\Models\User;
+use CodePress\CodeUser\Models\Role;
 
 class AdminPostsTest extends \TestCase
 {
 	
 	use DatabaseTransactions;
-	
+
+
+  public function test_if_user_is_not_allowed(){
+     $this
+        ->get('admin/posts')
+        ->seeStatusCode(403);
+  }
+
+  public function test_if_user_is_authenticated(){
+    $redator = $this->getRedator();
+    $this->actingAs($redator)
+         ->visit('admin/posts')// Acessa página
+         ->see('posts');
+  }
+
+
     public function test_sample(){
-        $this->visit('admin/posts')// Acessa página
+        $redator = $this->getRedator();
+        $this->actingAs($redator)
+        ->visit('admin/posts')// Acessa página
         ->see('posts'); // Verifica se teste passa
         //->see('Categoriesss'); //Verifica se teste não passa
     }
@@ -22,7 +41,9 @@ class AdminPostsTest extends \TestCase
         Post::create(['title'=>'Post 3','content'=>'Conteudo Post 3']);
         Post::create(['title'=>'Post 4','content'=>'Conteudo Post 4']);
 
-        $this->visit('admin/posts')
+        $redator = $this->getRedator();
+        $this->actingAs($redator)
+        ->visit('admin/posts')
             ->see('Post 1')
             ->see('Post 2')
             ->see('Post 3')
@@ -31,7 +52,9 @@ class AdminPostsTest extends \TestCase
 
     
     public function test_create_new_post(){
-       $this->visit('admin/posts/create')  
+       $redator = $this->getRedator();
+        $this->actingAs($redator)
+           ->visit('admin/posts/create')  
            ->type('Post Test','title')          
            ->type('Conteudo do meu post','content')          
            ->press('Create Post')
@@ -40,26 +63,34 @@ class AdminPostsTest extends \TestCase
            //->see('Conteudo do meu post');
    }
 
-/*
+
   public function test_update_a_post(){
        $post = Post::create(['title'=>'Post 1','content'=>'Conteudo do meu post']);
-       $this->visit('admin/posts/{$post->id}/edit')  
+       $redator = $this->getRedator();
+        $this->actingAs($redator)
+           ->visit("admin/posts/{$post->id}/edit")  
            ->type('Post Alterado','title')          
            ->type('Conteudo do meu post','content')          
-           ->press('Create Post')
+           ->press('Edit Post')
            ->seePageIs('admin/posts')
-           ->see('Post Alterado')
-           ->see('Conteudo do meu post');
+           ->see('Post Alterado');
    }
 
 
     public function test_click_edit_a_post(){
        $post = Post::create(['title'=>'Post 1','content'=>'Conteudo do meu post']);
-       $this->visit('admin/posts')  
-           ->click(link_edit_post_{$post->id})          
-           ->seePageIs('admin/posts/{$post->id}/edit')
+       $redator = $this->getRedator();
+        $this->actingAs($redator)
+           ->visit('admin/posts')  
+           ->click("link_edit_post_{$post->id}")          
+           ->seePageIs("admin/posts/{$post->id}/edit")
            ->see('Edit post');
    }
-*/
-    
+
+  protected function getRedator(){
+      $redator = factory(User::class) ->create(); 
+      $roleRedator = Role::where('name',Role::ROLE_REDATOR)->first();
+      $redator->roles()->save($roleRedator); 
+      return $redator;  
+  }
 }
