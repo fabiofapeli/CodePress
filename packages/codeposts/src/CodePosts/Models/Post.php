@@ -2,6 +2,8 @@
 namespace CodePress\CodePosts\Models;
 
 use CodePress\CodeCategory\Models\Category;
+use CodePress\CodeTag\Models\Tag;
+use CodePress\CodeUser\Models\User;
 use CodePress\CodePosts\Models\Comment;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
@@ -58,14 +60,28 @@ class Post extends Model implements SluggableInterface
        return true;
    }
 
-   public function categories(){
-    return $this->morphToMany(Category::class, 'categorizable', 'codepress_categorizables');
-   }
-
-
    public function comments(){
     return $this->hasMany(Comment::class);
    }
 
+   public function categories(){
+    return $this->morphToMany(Category::class, 'categorizable', 'codepress_categorizables');
+   }
+
+   public function tags(){
+    return $this->morphToMany(Tag::class, 'taggable', 'codepress_taggables');
+   }
+
+   public function getTagsArrayAttribute(){
+    return $this->tags->lists('id')->toArray();
+   }
+
+   public function getCategoriesArrayAttribute(){
+    return $this->categories->lists('id')->toArray();
+   }
+
+   public function user(){
+    return $this->belongsTo(User::class);
+   }
 
 }

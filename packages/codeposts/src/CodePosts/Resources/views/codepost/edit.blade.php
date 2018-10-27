@@ -14,12 +14,22 @@
          {{ $post->state == $post::STATE_PUBLISHED ? "Publish" : "Draft" }}
          </span>
        </h3>
-
+       <p>Autor: <strong>{{ $post->user->name }}</strong></p>
       {!! Form::model($post, ['method'=>'put', 'route'=>['admin.posts.update', $post->id]]) !!}
 
        <div class="form-group">
            {!! Form::label('title',"Title:") !!}
            {!! Form::text('title',null,['class'=>'form-control']) !!}
+       </div>
+       
+       <div class="form-group">
+           {!! Form::label('categories',"Categories:") !!}
+           {!! Form::select('categories_array', $categories, null,['class'=>'form-control', 'name'=>'categories[]', 'multiple' => 'true']) !!}
+       </div>
+
+       <div class="form-group">
+           {!! Form::label('tags',"Tags:") !!}
+           {!! Form::select('tags_array', $tags, null,['class'=>'form-control', 'name'=>'tags[]', 'multiple' => 'true']) !!}
        </div>
 
        <div class="form-group">

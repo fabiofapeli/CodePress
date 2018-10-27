@@ -13,7 +13,7 @@ class AdminCategoryController extends Controller
 
    public function __construct(ResponseFactory $response,CategoryRepositoryInterface $repository)
    {   
-       $this->authorize('access_categories');
+       //$this->authorize('access_categories');
        $this->response = $response;
        $this->repository = $repository;
    }

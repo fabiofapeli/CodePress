@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Validator; 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use CodePress\CodePosts\Models\Post;
 
 class Tag extends Model implements SluggableInterface
 {
@@ -29,6 +30,13 @@ class Tag extends Model implements SluggableInterface
     public function taggable(){
         $this->morphTo();
     }
+
+    public function posts(){
+      return $this->morphedByMany(Post::class,
+      'taggable', 
+      'codepress_taggables'); 
+    }
+
    
     //Validator (opcional) - obriga que o método aceite somente o argumento se esse for uma instância de validator
     public function setValidator(Validator $validator){

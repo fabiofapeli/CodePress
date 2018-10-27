@@ -15,7 +15,6 @@ class RolesController extends Controller
 
    public function __construct(ResponseFactory $response,RoleRepositoryInterface $repository, PermissionRepositoryInterface $permissionRepository)
    {   
-       $this->authorize('access_users');
        $this->response = $response;
        $this->repository = $repository;
     $this->permissionRepository = $permissionRepository;

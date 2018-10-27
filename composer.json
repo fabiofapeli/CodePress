@@ -18,6 +18,9 @@
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
     "autoload": {
+        "files": [
+            "packages/codeapp/src/CodeApp/helpers.php"
+        ],
         "classmap": [
             "database"
         ],
@@ -27,7 +30,8 @@
             "CodePress\\CodeTag\\": "packages/codetag/src/CodeTag/",
             "CodePress\\CodePosts\\": "packages/codeposts/src/CodePosts/",
             "CodePress\\CodeUser\\": "packages/codeuser/src/CodeUser/",
-            "CodePress\\CodeDatabase\\": "packages/codedatabase/src/CodeDatabase/"
+            "CodePress\\CodeDatabase\\": "packages/codedatabase/src/CodeDatabase/",
+            "CodePress\\CodeApp\\": "packages/codeapp/src/CodeApp/"
         }
     },
     "autoload-dev": {

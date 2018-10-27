@@ -29,7 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         //não executa no terminal para evitar erros
-        if(!app()->runningInConsole() || app()->runningUnitTests()){ 
+        // || app()->runningUnitTests()
+        if(!app()->runningInConsole()){ 
             $permissionRepository = app(PermissionRepositoryInterface::class);
             $permissions = $permissionRepository->all();
             foreach ($permissions as $p) {

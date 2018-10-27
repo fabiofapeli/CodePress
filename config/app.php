@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         \CodePress\CodeCategory\Providers\CodeCategoryServiceProvider::class,
+        \CodePress\CodeApp\Providers\CodeAppServiceProvider::class,
         \CodePress\CodeTag\Providers\CodeTagServiceProvider::class,
         \CodePress\CodePosts\Providers\CodePostServiceProvider::class,
         \CodePress\CodeUser\Providers\CodeUserServiceProvider::class,

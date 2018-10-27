@@ -15,5 +15,10 @@
     "psr-4": {
       "CodePress\\CodeUser\\": "src/CodeUser/"
     }
+  },
+  "autoload-dev": {
+    "classmap": [ 
+      "src/resources/migrations"
+      ]
   }
 }

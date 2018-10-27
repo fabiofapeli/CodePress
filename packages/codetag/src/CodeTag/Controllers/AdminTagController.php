@@ -2,7 +2,7 @@
 
 namespace CodePress\CodeTag\Controllers;
 
-use CodePress\CodeTag\Repository\TagRepository;
+use CodePress\CodeTag\Repository\TagRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -11,8 +11,7 @@ class AdminTagController extends Controller {
     private $response;
     private $repository;
 
-    public function __construct(ResponseFactory $response, TagRepository $repository) {
-        $this->authorize('access_tags');
+    public function __construct(ResponseFactory $response, TagRepositoryInterface $repository) {
         $this->repository = $repository;
         $this->response = $response;
     }

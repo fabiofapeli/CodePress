@@ -32,30 +32,30 @@ class AuthorizationRepositoryTest extends AbstractTestCase
         $this->createUser();
         $this->createRoles();
 
-        $this->assertCount(3,$this->app->make(RoleRepositoryInterface::class)->all());
+        $this->assertCount(6,$this->app->make(RoleRepositoryInterface::class)->all());
 
         //chama usuário id=1 e adiciona roles
-        $this->app->make(UserRepositoryInterface::class)->addRoles(1,[1,2,3]);
+        $this->app->make(UserRepositoryInterface::class)->addRoles(2,[4,5,6]);
 
-        $this->assertCount(3,User::find(1)->roles);
-        $this->assertCount(1,Role::find(1)->users);
-        $this->assertTrue(User::find(1)->isAdmin());
+        $this->assertCount(3,User::find(2)->roles);
+        $this->assertCount(1,Role::find(4)->users);
+        $this->assertTrue(User::find(2)->isAdmin());
     }
 
     public function test_can_create_permission(){
         $this->createRoles();
         $this->createPermissions();
-        $this->assertCount(3,$this->app->make(PermissionRepositoryInterface::class)->all());
+        $this->assertCount(8,$this->app->make(PermissionRepositoryInterface::class)->all());
 
         //chama roles id = 1,2 e 3 e adiciona permissões
-        $this->app->make(RoleRepositoryInterface::class)->addPermissions(1,[1,2]);
-        $this->app->make(RoleRepositoryInterface::class)->addPermissions(2,[1]);
-        $this->app->make(RoleRepositoryInterface::class)->addPermissions(3,[1,2,3]);
+        $this->app->make(RoleRepositoryInterface::class)->addPermissions(4,[6,7]);
+        $this->app->make(RoleRepositoryInterface::class)->addPermissions(5,[6]);
+        $this->app->make(RoleRepositoryInterface::class)->addPermissions(6,[6,7,8]);
 
-        $this->assertCount(2,Role::find(1)->permissions);
-        $this->assertCount(1,Role::find(2)->permissions);
-        $this->assertCount(3,Role::find(3)->permissions);
-        $this->assertCount(3,Permission::find(1)->roles);
+        $this->assertCount(1,Role::find(5)->permissions);
+        $this->assertCount(2,Role::find(4)->permissions);
+        $this->assertCount(3,Role::find(6)->permissions);
+        $this->assertCount(3,Permission::find(6)->roles);
     }
 
     protected function createUser(){

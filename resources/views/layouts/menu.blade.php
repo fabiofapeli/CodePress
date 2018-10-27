@@ -15,6 +15,7 @@
             <li><a href="{{ url('/admin/users') }}">Users</a></li>
             <li><a href="{{ url('/admin/roles') }}">Roles</a></li>
             <li><a href="{{ url('/admin/permissions') }}">Permissions</a></li>
+            <li><a href="{{ url('/admin/layouts') }}">Layouts</a></li>
         @endcan
     </ul>
 

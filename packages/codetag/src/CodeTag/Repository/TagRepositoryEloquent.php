@@ -4,7 +4,7 @@ namespace CodePress\CodeTag\Repository;
 use CodePress\CodeTag\Models\Tag;
 use CodePress\CodeDatabase\AbstractRepository;
 
-class TagRepository extends AbstractRepository
+class TagRepositoryEloquent extends AbstractRepository implements TagRepositoryInterface
 {
 
     public function model() {
